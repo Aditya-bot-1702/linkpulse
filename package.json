@@ -1,0 +1,25 @@
+{
+  "name": "url-shortener",
+  "version": "1.0.0",
+  "description": "An URL shortener with analytics",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon ./dist/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aditya Dutta",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^2.3.0",
+    "express": "^5.2.1",
+    "mysql2": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.6",
+    "@types/express": "^5.0.6",
+    "@types/node": "^22.20.2",
+    "dotenv": "^18.0.8",
+    "nodemon": "^3.1.14"
+  }
+}
