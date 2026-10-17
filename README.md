@@ -1,2 +1,2 @@
 # linkpulse
-Self-hosted URL shortener with built-in click analytics. Create short links, track clicks, referrers, devices, and locations in a clean dashboard.
+LinkPulse is a fast, self-hosted URL shortener with real-time analytics. Turn long URLs into short, shareable links and see how they perform: total clicks, unique visitors, referrers, countries, devices, and browsers, all in one dashboard.
