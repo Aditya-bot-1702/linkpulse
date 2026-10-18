@@ -4,6 +4,7 @@ import uidPrefixGenerator from "../utils/uidPrefixGenerator.js";
 import conn from "../utils/db.js";
 import map from "../utils/map.js";
 import baseSixtyTwoConvertor from "../utils/baseSixtyTwoConvertor.js";
+import "dotenv/config";
 
 export let sequenceNumber = BigInt(0);
 
@@ -15,11 +16,13 @@ export const createShortUrl = (
   let uidPrefix = uidPrefixGenerator();
   let uid = uidPrefix | BigInt(sequenceNumber);
   let shortCode = baseSixtyTwoConvertor(uid);
-  const sql = "INSERT INTO `urls` VALUES (?,?,?)";
   let longUrl = req.body.url;
+  let expiresAt = req.body.expiresAt;
+  let createdAt = new Date();
+  const sql = "INSERT INTO `urls` VALUES (?,?,?,?,?)";
   conn.execute<ResultSetHeader>(
     sql,
-    [uid, shortCode, longUrl],
+    [uid, shortCode, longUrl, createdAt, expiresAt],
     (_err, result) => {
       if (_err) {
         console.log(_err);
@@ -29,7 +32,14 @@ export const createShortUrl = (
     },
   );
   sequenceNumber += BigInt(1);
-  res.send(JSON.stringify({ uid: uid.toString(), shortCode }));
+  res.send(
+    JSON.stringify({
+      shortUrl: `http://${process.env.DOMAIN}:${process.env.PORT}/${shortCode}`,
+      originalUrl: longUrl,
+      createdAt: createdAt.toISOString(),
+      expiresAt,
+    }),
+  );
 };
 
 export const resetSequenceNumber = () => {

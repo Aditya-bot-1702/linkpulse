@@ -14,6 +14,7 @@ const access: PoolOptions = {
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
+  timezone: "Z",
 };
 
 const conn = mysql.createPool(access);
